@@ -19,7 +19,8 @@ class TestConsole(unittest.TestCase):
         """Tests the do_help function"""
         with patch('sys.output', new=self.output):
             self.console.onecmd('help')
-        self.assertIn("Documented commands (type help <topic>)", self.output.getvalue())
+        self.assertIn("Documented commands (type help <topic>)",
+                      self.output.getvalue())
 
     def test_help_all(self):
         """Tests the do_all function"""

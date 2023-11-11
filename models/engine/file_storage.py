@@ -5,7 +5,10 @@ import json
 
 
 class FileStorage():
-    """a class FileStorage that serializes instances to a JSON file and deserializes JSON file to instances"""
+    """
+    a class FileStorage that serializes instances to
+    a JSON file and deserializes JSON file to instances
+    """
     __file_path = "file.json"
     __objects = {}
 

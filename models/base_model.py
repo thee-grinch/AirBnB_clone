@@ -7,15 +7,22 @@ from datetime import datetime
 
 
 class BaseModel:
-    """this is a class base model that defines all common attributes/methods for other classes"""
+    """
+    this is a class base model that defines all common
+    attributes/methods for other classes
+    """
     def __init__(self, *args, **kwargs):
         """this is a class construnctor method"""
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
                     setattr(self, key, value)
-            setattr(self, "created_at", datetime.strptime(kwargs['created_at'], "%Y-%m-%dT%H:%M:%S.%f"))
-            setattr(self, "updated_at", datetime.strptime(kwargs['updated_at'], "%Y-%m-%dT%H:%M:%S.%f"))
+            setattr(self, "created_at",
+                    datetime.strptime(kwargs['created_at'],
+                                      "%Y-%m-%dT%H:%M:%S.%f"))
+            setattr(self, "updated_at",
+                    datetime.strptime(kwargs['updated_at'],
+                                      "%Y-%m-%dT%H:%M:%S.%f"))
             storage.new(self)
         else:
             self.id = str(uuid4())
@@ -23,7 +30,9 @@ class BaseModel:
             self.updated_at = datetime.now()
 
     def __str__(self):
-        """this method  should print: [<class name>] (<self.id>) <self.__dict__>"""
+        """
+        this method  should print: [<class name>] (<self.id>) <self.__dict__>
+        """
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
@@ -36,7 +45,7 @@ class BaseModel:
         """this method  returns a dictionary containing
         all keys/values of __dict__ of the instance"""
         dictionary = self.__dict__
-        dictionary.update({"__class__": self.__class__.__name__, "updated_at"\
-                : self.updated_at.isoformat(), "created_at": self.created_at.isoformat()})
+        dictionary.update({"__class__": self.__class__.__name__, "updated_at":
+                           self.updated_at.isoformat(), "created_at":
+                           self.created_at.isoformat()})
         return dictionary
-
