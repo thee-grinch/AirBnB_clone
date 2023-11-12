@@ -85,6 +85,7 @@ class TestConsole(unittest.TestCase):
         Test the 'all' command when there are no instances.
         """
         with patch('sys.stdout', new=self.output):
+            self.console.onecmd("create User")
             self.console.onecmd("all")
         self.assertIn("[User]", self.output.getvalue())
 
