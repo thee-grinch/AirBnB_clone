@@ -1,15 +1,16 @@
 #!/usr/bin/python3
 """Represents the Command Interpreter for HBNB"""
+import re
 import cmd
 import shlex
 from models import storage
-from models.base_model import BaseModel
 from models.city import City
 from models.user import User
-from models.amenity import Amenity
 from models.place import Place
 from models.state import State
 from models.review import Review
+from models.amenity import Amenity
+from models.base_model import BaseModel
 
 
 def parse_command(arg):
@@ -127,6 +128,7 @@ class HBNBCommand(cmd.Cmd):
         Print the string representation of all instances based on class name.
         Usage: all [optional: <class name>]
         """
+        storage.reload()
         class_name, _ = parse_command(arg)
         if class_name:
             if class_name not in HBNBCommand.__classes:
@@ -178,7 +180,64 @@ class HBNBCommand(cmd.Cmd):
             existing_attribute_type = type(getattr(instance, attribute_name))
             attribute_value = existing_attribute_type(attribute_value)
             setattr(instance, attribute_name, attribute_value)
-            storage.save()
+        else:
+            setattr(instance, attribute_name, attribute_value)
+        storage.save()
+
+    def do_count(self, arg):
+        """Returns the number of instances of a class"""
+        args = shlex.split(arg)
+        if not args:
+            print("** class name missing **")
+            return
+        class_name = args[0]
+        if class_name not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+            return
+        else:
+            count = 0
+            for key in storage.all():
+                if arg == key.split('.')[0]:
+                    count += 1
+            print(count)
+
+    def default(self, arg):
+        """
+        Default implemetentataion if invalid commands are passed
+        """
+        pattern = r"(\w+)\.(\w+)(\((.*?)\))?"
+        match = re.match(pattern, arg)
+
+        if match:
+            object_, method, params = match.groups()[:-1]
+            dict_ = {
+                'all': self.do_all,
+                'show': self.do_show,
+                'update': self.do_update,
+                'destroy': self.do_destroy,
+                'count': self.do_count
+            }
+            if params == '()':
+                params = None
+            else:
+                params = params[1:-1].replace('"', '')
+
+            if method in dict_:
+                if params is not None and method == 'update':
+                    id, attribute, value = params.split(',')
+                    command = '{} {} {} {} "{}"'.format(method, object_,
+                                                        id.strip(),
+                                                        attribute.strip(),
+                                                        value.strip())
+                    return self.onecmd(command)
+                if params is not None:
+                    command = "{} {} {}".format(method, object_, params)
+                    return self.onecmd(command)
+                else:
+                    return dict_[method](object_)
+        else:
+            print("*** Unknown syntax:", arg)
+            return False
 
 
 if __name__ == '__main__':
