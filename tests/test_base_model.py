@@ -1,6 +1,8 @@
 import unittest
 from models.base_model import BaseModel
 import datetime
+import sys
+from io import StringIO
 
 """This module has all the unittests of the base_model and their methods"""
 
@@ -33,6 +35,38 @@ class test_init_without_kwargs(unittest.TestCase):
         cl1 = BaseModel()
         cl2 = BaseModel()
         self.assertNotEqual(cl1.id, cl2.id)
+
+class test_str_method(unittest.TestCase):
+    """this is a class to test the __str__ method"""
+    def test_print(self):
+        saved_output = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+            my_class = BaseModel()
+            print(my_class)
+            output = out.getvalue().strip()
+            self.assertEqual(output, f"[{my_class.__class__.__name__}] {my_class.id} {my_class.__dict__}")
+        finally:
+            sys.stdout = saved_output
+
+class test_save_method(unittest.TestCase):
+    """this method tests the save method"""
+    def test_save(self):
+        """this method tests the save method"""
+        my_class = BaseModel()
+        my_class.save()
+        self.assertAlmostEqual(my_class.updated_at, datetime.datetime.now(), delta=datetime.timedelta(seconds=1))
+
+class test_to_dict_method(unittest.TestCase):
+    """this tests  the to dict method of the object"""
+    def test_to_dict(self):
+        my_class = BaseModel()
+        my_dict = my_class.to_dict()
+        self.assertIsInstance(my_dict, dict)
+        self.assertIsInstance(my_dict["updated_at"], str)
+        self.assertIsInstance(my_dict["created_at"], str)
+
 if __name__ == '__main__':
     unittest.main()
         
