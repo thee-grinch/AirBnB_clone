@@ -46,6 +46,6 @@ class BaseModel:
         dictionary = self.__dict__
         dict_cpy = dictionary.copy()
         dict_cpy.update({"__class__": self.__class__.__name__, "updated_at":
-                           self.updated_at.isoformat(), "created_at":
-                           self.created_at.isoformat()})
+                         self.updated_at.isoformat(), "created_at":
+                         self.created_at.isoformat()})
         return dict_cpy
