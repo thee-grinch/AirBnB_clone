@@ -1,4 +1,4 @@
-< h1 > AIR BNB CLONE PROJECT < / h1 >
+<h1> AIR BNB CLONE PROJECT </h1>
 <p> This project covers the main python oop basics for a project </p>
 
 <h2> LEARNING OBJECTIVES</h2>
