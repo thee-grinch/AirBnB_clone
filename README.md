@@ -1,4 +1,3 @@
-
 # AirBnB CLONE PROJECT
 ![AirBnB](./airbnb.png)
 
@@ -20,7 +19,7 @@ The command interpreter allows us to:
 - Have cloned this repository in your local machine
 --------------------------------------------------
 
-To start the command interpreter, cd int project root directory and run the following command:
+To start the command interpreter, cd into the project root directory and run the following command:
 ```bash
 $ ./console.py
 ```
