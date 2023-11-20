@@ -1,15 +1,15 @@
 @media only screen and (max-width: 600px) {
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Small deviceshb (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
 
 }
-/* Medium devices (landscape tablets, 768px and up) */
+/* Medium devices hb(landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
 
 }
-/* Large devices (laptops/desktops, 992px and up) */
+/* Large deviceshjb (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
 
 }
@@ -47,10 +47,10 @@
   flex-grow: 1;
 }
 /* ************************************************** */
-/* article information */
+/* article injhformation */
 /* ************************************************** */
 
-/* circle with price */
+/* circle with pjhhrice */
 .article_places_header {
   width: 100%;
   display: flex;
@@ -71,7 +71,7 @@
 }
 
 /* ******************************************/
-/* information box with icons */
+/* informatiohjbn box with icons */
 /* ******************************************/
 
 .information {
@@ -92,7 +92,7 @@
 }
 
 /***********/
-/* icons   */
+/* icons  jhb */
 
 .max_guest {
   background-image: url(../images/icon_group.png);
@@ -118,7 +118,7 @@
 }
 
 /*******************************************/
-/* more information */
+/* more inforhbmation */
 /*******************************************/
 .places .amenities,
 .places .reviews {
@@ -148,7 +148,7 @@
   font-size: 12px;
 }
 /*******************************************/
-/* amenities icons */
+/* amenities iconsbn */
 /*******************************************/
 .places .amenities ul li{
   display: flex;
